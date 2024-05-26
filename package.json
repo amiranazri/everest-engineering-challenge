@@ -1,0 +1,15 @@
+{
+    "name": "everest",
+    "version": "1.0.0",
+    "description": "Everest Engineering Coding Challenge",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "test": "jest"
+    },
+    "author": "Amira Nazri",
+    "license": "ISC"
+}
