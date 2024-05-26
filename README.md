@@ -40,7 +40,7 @@ npm start
 We welcome contributions from everyone! If you have ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the [ISC License](LICENSE).
 
 ## Acknowledgements
 I would like to thank Everest Engineering for providing the challenge and opportunity to build Koriko Courier Service. Special thanks to Kiki, Tombo, and Joji for their inspiration and support throughout the journey! <3
