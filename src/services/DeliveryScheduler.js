@@ -4,10 +4,10 @@ const Package = require("../models/Package");
 class DeliveryScheduler {
   constructor(vehicles) {
     this.vehicles = vehicles;
+    this.scheduledPackages = [];
   }
 
   scheduleDeliveries(packages) {
-    const deliveries = [];
     packages.sort((a, b) => b.weight - a.weight || a.distance - b.distance); // Heaviest and closest first
 
     while (packages.length > 0) {
@@ -32,13 +32,16 @@ class DeliveryScheduler {
 
       tripPackages.forEach((pkg) => {
         const deliveryTime = vehicle.availableAt + tripTime;
-        deliveries.push({ id: pkg.id, deliveryTime: deliveryTime.toFixed(2) });
+        this.scheduledPackages.push({
+          id: pkg.id,
+          deliveryTime: deliveryTime.toFixed(2),
+        });
       });
 
       vehicle.availableAt += tripTime + returnTime;
     }
 
-    return deliveries;
+    return this.scheduledPackages;
   }
 }
 

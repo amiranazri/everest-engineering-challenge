@@ -17,7 +17,6 @@ offerRepo.addOffer(new Offer("OFR002", 50, 150, 100, 250, 7));
 offerRepo.addOffer(new Offer("OFR003", 50, 250, 10, 150, 5));
 
 rl.question("Enter base delivery cost and number of packages: ", (input) => {
-  // console.log("Input received:", input);
   const [baseCost, numPackages] = input.split(" ").map(Number);
   const estimator = new DeliveryCostEstimator(baseCost, offerRepo);
 
@@ -25,6 +24,8 @@ rl.question("Enter base delivery cost and number of packages: ", (input) => {
 
   const getPackages = (count) => {
     if (count === numPackages) {
+      console.log("Packages:", packages);
+
       rl.question(
         "Enter number of vehicles, max speed, and max carriable weight: ",
         (input) => {
@@ -38,21 +39,28 @@ rl.question("Enter base delivery cost and number of packages: ", (input) => {
           );
           const scheduler = new DeliveryScheduler(vehicles);
 
-          const deliveries = scheduler.scheduleDeliveries(packages);
+          const deliveries = scheduler.scheduleDeliveries([...packages]);
 
-          // console.log("Deliveries:", deliveries);
-          // console.log("Packages:", packages);
+          console.log("Deliveries:", deliveries);
+
           deliveries.forEach((delivery) => {
-            // console.log("Delivery ID:", delivery.id);
-            const pkg = packages.find((pkg) => pkg.id === delivery.id);
-            // console.log("Package:", pkg);
-            const totalCost = calculateCost(baseCost, pkg.weight, pkg.distance);
-            const discount = calculateDiscount(pkg, totalCost);
-            // console.log(
-            //   `${pkg.id} ${discount} ${totalCost - discount} ${
-            //     delivery.deliveryTime
-            //   }`
-            // );
+            const pkg = packages.find((pkg) => pkg.id === String(delivery.id));
+            // console.log("BRUH", pkg);
+            if (pkg) {
+              const totalCost = calculateCost(
+                baseCost,
+                pkg.weight,
+                pkg.distance
+              );
+              const discount = calculateDiscount(pkg, totalCost);
+              console.log(
+                `${pkg.id} ${discount} ${totalCost - discount} ${
+                  delivery.deliveryTime
+                }`
+              );
+            } else {
+              console.log(`Package with ID ${delivery.id} not found`);
+            }
           });
 
           rl.close();
@@ -63,7 +71,6 @@ rl.question("Enter base delivery cost and number of packages: ", (input) => {
 
     rl.question("Enter package details: ", (input) => {
       const [id, weight, distance, offerCode] = input.split(" ");
-      // console.log("Parsed values:", id, weight, distance, offerCode);
       packages.push(
         new Package(id, Number(weight), Number(distance), offerCode)
       );
@@ -79,13 +86,6 @@ function calculateCost(baseCost, weight, distance) {
 }
 
 function calculateDiscount(pkg, totalCost) {
-  // console.log(
-  //   `${pkg.id} ${discount} ${totalCost - discount} ${delivery.deliveryTime}`
-  // );
-  const offerRepo = new OfferRepository();
-  offerRepo.addOffer(new Offer("OFR001", 0, 200, 70, 200, 10));
-  offerRepo.addOffer(new Offer("OFR002", 50, 150, 100, 250, 7));
-  offerRepo.addOffer(new Offer("OFR003", 50, 250, 10, 150, 5));
   const offer = offerRepo.getOffer(pkg.offerCode);
   return offer && offer.isValid(pkg.weight, pkg.distance)
     ? offer.calculateDiscount(totalCost)
