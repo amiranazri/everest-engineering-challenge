@@ -36,6 +36,34 @@ npm start
 
 4. **Follow the Prompts**: Enter the required information as prompted to estimate delivery costs and schedule deliveries.
 
+## How to Use
+
+### Example Input
+```plaintext
+base_delivery_cost no_of_packges
+pkg_id1 pkg_weight1_in_kg distance1_in_km offer_code1
+no_of_vehicles max_speed max_carriable_weight
+
+...
+
+100 3
+PKG1 5 5 OFR001
+PKG2 15 5 OFR002
+PKG3 10 100 OFR003
+2 70 200
+```
+
+### Example Output
+```plaintext
+pkg_id1 discount1 total_cost1 estimated_delivery_time1_in_hours
+
+...
+
+PKG1 0 175 3.56
+PKG2 0 275 1.78
+PKG3 35 665 1.42
+```
+
 ## Contributing
 We welcome contributions from everyone! If you have ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request.
 
