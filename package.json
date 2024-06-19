@@ -11,5 +11,8 @@
         "test": "jest"
     },
     "author": "Amira Nazri",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "jest": "^29.7.0"
+    }
 }

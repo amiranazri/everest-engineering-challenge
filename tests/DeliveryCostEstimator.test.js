@@ -11,7 +11,7 @@ test("DeliveryCostEstimator calculates cost correctly without discount", () => {
   const { discount, totalCost } = estimator.calculateCost(pkg);
 
   expect(discount).toBe(0);
-  expect(totalCost).toBe(175);
+  expect(totalCost).toBe(175); // Base cost 100 + 5*10 + 5*5 = 175
 });
 
 test("DeliveryCostEstimator calculates cost correctly with discount", () => {
@@ -23,5 +23,16 @@ test("DeliveryCostEstimator calculates cost correctly with discount", () => {
   const { discount, totalCost } = estimator.calculateCost(pkg);
 
   expect(discount).toBe(35); // 5% of 700
-  expect(totalCost).toBe(665);
+  expect(totalCost).toBe(665); // 700 - 35
+});
+
+test("DeliveryCostEstimator handles invalid offer code", () => {
+  const offerRepo = new OfferRepository();
+  const estimator = new DeliveryCostEstimator(100, offerRepo);
+
+  const pkg = new Package("PKG4", 5, 5, "INVALID");
+  const { discount, totalCost } = estimator.calculateCost(pkg);
+
+  expect(discount).toBe(0);
+  expect(totalCost).toBe(175);
 });
