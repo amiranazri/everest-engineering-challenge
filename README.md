@@ -64,8 +64,6 @@ PKG2 0 275 1.78
 PKG3 35 665 1.42
 ```
 
-[Miro Board Flow Chart](https://miro.com/app/board/uXjVKBkyI9o=/?share_link_id=630963926507)
-
 1. **Config**
     
     - **offers.json**: Stores offer codes and their criteria, allowing easy modification and extension of discount rules.
@@ -94,6 +92,7 @@ PKG3 35 665 1.42
 3. **index.js**: Entry point for the application, handling user input and coordinating between different module
 
 ## Explanation for Project Structure
+
 - **Modularity**: Each part of the project (like models and services) is kept in its own section. This makes the code easier to manage and grow.
 - **Separation of Concerns**: Different tasks are handled in different places (like data handling, business logic, and utilities), making the project easier to understand and work on.
 - **Configuration Management**: Offer codes are stored in a separate file (config/offers.json). This makes it easy to update them without changing the main code.
@@ -101,6 +100,9 @@ PKG3 35 665 1.42
 - **Entry Point**: The index.js file is where the program starts. It manages user input and connects all parts of the project.
 
 This setup helps create a flexible and scalable application for estimating delivery costs and scheduling deliveries, making it easy to develop and maintain each part of the system separately.
+
+[Miro Board Flow Chart](https://miro.com/app/board/uXjVKBkyI9o=/?share_link_id=630963926507)
+
 
 ## Contributing
 We welcome contributions from everyone! If you have ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request.
